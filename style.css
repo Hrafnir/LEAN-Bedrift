@@ -1,102 +1,301 @@
+:root {
+    --primary-color: #6a11cb; /* En lilla farge */
+    --secondary-color: #2575fc; /* En blåfarge */
+    --gradient-main: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    --text-color: #333;
+    --light-text-color: #555;
+    --bg-color: #f4f7f6; /* Litt endret bakgrunnsfarge */
+    --card-bg-color: #ffffff;
+    --border-color: #e0e0e0;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --star-color: #f8d64e; /* Gullfarge for stjerner */
+    --font-family: 'Poppins', sans-serif;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
 body {
-    font-family: sans-serif;
+    font-family: var(--font-family);
     margin: 0;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
 }
 
 .container {
-    width: 80%;
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 20px 30px;
 }
 
-h1, h2 {
-    color: #333;
+header {
     text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+}
+
+header .header-icon {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2.2em;
+    margin: 0;
+}
+
+h2 {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-top: 0;
     margin-bottom: 20px;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+h2 .icon-left {
+    margin-right: 10px;
+    color: var(--secondary-color);
+}
+
+h2 small {
+    font-size: 0.7em;
+    color: var(--light-text-color);
+    font-weight: 400;
+    margin-left: 10px;
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border-left: 5px solid var(--primary-color);
 }
 
 form label {
     display: block;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--light-text-color);
 }
 
 form input[type="text"],
-form select,
 form textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px 15px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
     box-sizing: border-box;
+    font-family: var(--font-family);
+    font-size: 0.95em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.2);
+    outline: none;
 }
 
 form textarea {
     resize: vertical;
+    min-height: 80px;
 }
 
-form button, .danger-button {
-    display: block;
+/* Stjerne-rating */
+.rating-stars {
+    display: flex;
+    gap: 5px; /* Mellomrom mellom stjerner */
+    margin-bottom: 15px;
+    font-size: 1.8em; /* Større stjerner */
+}
+
+.rating-stars .star {
+    color: #ccc; /* Grå for ikke-valgte */
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.rating-stars .star:hover,
+.rating-stars .star.hovered {
+    color: var(--star-color);
+    transform: scale(1.1);
+}
+.rating-stars .star.selected {
+    color: var(--star-color);
+}
+
+
+.submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     width: 100%;
-    padding: 10px;
-    background-color: #5cb85c;
+    padding: 15px;
+    background: var(--gradient-main);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.1em;
+    font-weight: 600;
     margin-top: 20px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-form button:hover {
-    background-color: #4cae4c;
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
-.success {
-    background-color: #dff0d8;
-    color: #3c763d;
-    padding: 10px;
-    border: 1px solid #d6e9c6;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    text-align: center;
+.submit-button:active {
+    transform: translateY(0);
 }
 
-hr {
-    margin: 30px 0;
+.success-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--success-color);
+    color: white;
+    padding: 15px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1em;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.success-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.divider {
+    margin: 40px 0;
     border: 0;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--border-color);
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.table-wrapper {
+    overflow-x: auto; /* For små skjermer */
+    background: var(--card-bg-color);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 0;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
     text-align: left;
-    word-break: break-word; /* For lange kommentarer */
+    word-break: break-word;
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #f8f9fa; /* Litt lysere enn før */
+    color: var(--primary-color);
+    font-weight: 600;
+    white-space: nowrap;
+}
+th i {
+    margin-right: 6px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fdfdfd;
+}
+tbody tr:hover {
+    background-color: #f1f1f1;
 }
 
 .danger-button {
-    background-color: #d9534f;
-    margin-top: 30px;
+    padding: 10px 15px;
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
+
 .danger-button:hover {
-    background-color: #c9302c;
+    background-color: #c82333;
+}
+
+.small-button {
+    padding: 8px 12px;
+    font-size: 0.85em;
+}
+
+#noFeedbackMessage {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+}
+
+/* Responsivitet */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 1.3em;
+    }
+    .rating-stars {
+        font-size: 1.5em;
+    }
+    .submit-button {
+        font-size: 1em;
+        padding: 12px;
+    }
+    th, td {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
 }
