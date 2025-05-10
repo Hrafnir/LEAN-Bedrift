@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilfredshetsscore PoC (Frontend)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tilbakemelding etter arbeidsøkt</h1>
+
+        <div id="successMessage" class="success" style="display:none;">
+            Takk for din tilbakemelding!
+        </div>
+
+        <form id="feedbackForm">
+            <h2>Din opplevelse av økten</h2>
+            <label for="employee_satisfaction_score">Hvordan var din arbeidsøkt? (1 = Dårlig, 5 = Utmerket)</label>
+            <select name="employee_satisfaction_score" id="employee_satisfaction_score" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3" selected>3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <label for="employee_comment_positive">Hva gikk bra?</label>
+            <textarea name="employee_comment_positive" id="employee_comment_positive" rows="3"></textarea>
+
+            <label for="employee_comment_improvement">Hva kunne vært bedre / hva hindret deg?</label>
+            <textarea name="employee_comment_improvement" id="employee_comment_improvement" rows="3"></textarea>
+
+            <hr>
+
+            <h2>Kundens opplevelse (hvis relevant)</h2>
+            <label for="customer_experience_score_by_employee">Hvordan oppfattet du kundens tilfredshet? (1 = Dårlig, 5 = Utmerket)</label>
+            <select name="customer_experience_score_by_employee" id="customer_experience_score_by_employee">
+                <option value="">Ikke relevant</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <label for="customer_experience_comment_by_employee">Kommentar til kundens opplevelse:</label>
+            <textarea name="customer_experience_comment_by_employee" id="customer_experience_comment_by_employee" rows="3"></textarea>
+
+            <label for="session_type">Type økt (f.eks. Salgsmøte, Support, Intern utvikling):</label>
+            <input type="text" name="session_type" id="session_type">
+
+            <button type="submit">Send inn</button>
+        </form>
+
+        <hr>
+        <h2>Innsendte tilbakemeldinger</h2>
+        <p id="noFeedbackMessage" style="display:none;">Ingen tilbakemeldinger ennå.</p>
+        <table id="feedbackTable" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Tidspunkt</th>
+                    <th>Din score</th>
+                    <th>Positivt</th>
+                    <th>Forbedring</th>
+                    <th>Kundescore (av deg)</th>
+                    <th>Kundekommentar</th>
+                    <th>Økttype</th>
+                </tr>
+            </thead>
+            <tbody id="feedbackTableBody">
+                <!-- Rader vil bli lagt til her av JavaScript -->
+            </tbody>
+        </table>
+
+        <button id="clearDataButton" class="danger-button">Slett alle lagrede tilbakemeldinger</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
